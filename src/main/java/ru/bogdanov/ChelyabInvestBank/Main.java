@@ -1,9 +1,9 @@
-package ru.bogdanov;
+package ru.bogdanov.ChelyabInvestBank;
 
-import ru.bogdanov.model.ECase;
-import ru.bogdanov.model.EGender;
+import ru.bogdanov.ChelyabInvestBank.model.ECase;
+import ru.bogdanov.ChelyabInvestBank.model.EGender;
 
-import static ru.bogdanov.convert.ConvertIntToStringNumber.convertIntToStringNumber;
+import static ru.bogdanov.ChelyabInvestBank.convert.ConvertIntToStringNumber.convertIntToStringNumber;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +11,7 @@ public class Main {
         sumProp(22, ECase.ТВОРИТЕЛЬНЫЙ, EGender.СРЕДНИЙ);
         sumProp(154323, ECase.ИМЕНИТЕЛЬНЫЙ, EGender.МУРЖСКОЙ);
         sumProp(154323, ECase.ТВОРИТЕЛЬНЫЙ, EGender.МУРЖСКОЙ);
+        sumProp(1_568_101, ECase.ТВОРИТЕЛЬНЫЙ, EGender.МУРЖСКОЙ);
     }
 
     private static void sumProp(long nSum, ECase eCase, EGender gender) {

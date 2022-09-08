@@ -1,6 +1,11 @@
-package ru.bogdanov.model;
+package ru.bogdanov.ChelyabInvestBank.model;
 
-public class SystemName {
+/**
+ * Числа для заполнения списков в классе DataNumbers
+ * */
+public class Numbers {
+    private int number;
+    private EGender gender;
     private String именительный;
     private String родительный;
     private String дательный;
@@ -8,13 +13,33 @@ public class SystemName {
     private String творительный;
     private String предложный;
 
-    public SystemName(String именительный, String родительный, String дательный, String винительный, String творительный, String предложный) {
+    public Numbers(int number, String именительный, String родительный, String дательный, String винительный, String творительный, String предложный) {
+        this.number = number;
         this.именительный = именительный;
         this.родительный = родительный;
         this.дательный = дательный;
         this.винительный = винительный;
         this.творительный = творительный;
         this.предложный = предложный;
+    }
+
+    public Numbers(int number, EGender gender, String именительный, String родительный, String дательный, String винительный, String творительный, String предложный) {
+        this.number = number;
+        this.gender = gender;
+        this.именительный = именительный;
+        this.родительный = родительный;
+        this.дательный = дательный;
+        this.винительный = винительный;
+        this.творительный = творительный;
+        this.предложный = предложный;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public EGender getGender() {
+        return gender;
     }
 
     public String getИменительный() {
@@ -43,7 +68,9 @@ public class SystemName {
 
     @Override
     public String toString() {
-        return "SystemNameSystem{" +
+        return "Numbers{" +
+                "number=" + number +
+                ", gender=" + gender +
                 ", именительный='" + именительный + '\'' +
                 ", родительный='" + родительный + '\'' +
                 ", дательный='" + дательный + '\'' +

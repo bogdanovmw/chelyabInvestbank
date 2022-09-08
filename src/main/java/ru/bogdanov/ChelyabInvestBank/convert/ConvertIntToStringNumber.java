@@ -1,11 +1,21 @@
-package ru.bogdanov.convert;
+package ru.bogdanov.ChelyabInvestBank.convert;
 
-import ru.bogdanov.model.ECase;
-import ru.bogdanov.model.EGender;
+import ru.bogdanov.ChelyabInvestBank.model.ECase;
+import ru.bogdanov.ChelyabInvestBank.model.EGender;
 
-import static ru.bogdanov.convert.UtilsSearchData.*;
+import static ru.bogdanov.ChelyabInvestBank.convert.UtilsSearchData.*;
 
 public class ConvertIntToStringNumber {
+    /**
+     * Данный метод принимает на вход три параметра
+     * @param number - число;
+     * @param aCase - падеж;
+     * @param gender - род;
+     * После проверяет не является ли число 0 или не выходит за диапазон,
+     * далее разбивает число на миллионы, тысячи, и до тысячи числами,
+     * далее проверяется миллионы, тысячи, до тысячи на 0
+     * если цифры не равно нулю, то вызывается метод convertToThousand(million, 1, aCase, gender)
+     * */
     public static String convertIntToStringNumber (long number, ECase aCase, EGender gender) {
         StringBuilder sb = new StringBuilder();
 
@@ -28,6 +38,18 @@ public class ConvertIntToStringNumber {
         return  sb.toString();
     }
 
+    /**
+     * Данный метод принимает на вход 4 параметра
+     * @param number - число;
+     * @param level - (1 - миллионы), (2 - тысячи), (3 - до тысячи) необходимые для описания миллионов и тысяч;
+     * @param aCase - падеж;
+     * @param gender - род;
+     * Данный метод разбивает число на сотни, десятки и единицы
+     * Входные параметры: 1_568_101
+     *               hundreds = 0 0 1
+     *               decimal = 5 6 8
+     *               units = 1 0 1
+     * */
     private static String convertToThousand(int number, int level, ECase aCase, EGender gender){
         StringBuilder sb = new StringBuilder();
 
@@ -35,34 +57,49 @@ public class ConvertIntToStringNumber {
         int decimal = (number - (hundreds * 100)) / 10;
         int units = number % 10 ;
 
+        /*
+        * Если hundreds не равен 0, через метод convertIntNumberToStringCase()
+        * ищем нужное слово по числу(int) и падежу, в результате получает сотни в прописи(String)
+        * */
         if (hundreds != 0) {
             sb.append(convertIntNumberToStringCase(hundreds * 100, aCase)).append(" ");
         }
 
+        // Переменная для числа от 10 до 20
         int number10Between20 = (decimal * 10) + units;
         if (decimal != 0) {
+            // Числа прописи от десяти до девятнадцати
             if (number10Between20 > 10 && number10Between20 < 20)
                 sb.append(convertIntNumberToStringCase(number10Between20, aCase)).append(" ");
+            // Остальные десятичные числа
             else
                 sb.append(convertIntNumberToStringCase(decimal * 10, aCase)).append(" ");
         }
 
+        // Проверка единиц
         if (units != 0 && !(number10Between20 > 10 && number10Between20 < 20)) {
-            if (level == 1 && (units == 1 || units == 2)) // для миллионов
+            // склонение прописи числа для миллионов
+            if (level == 1 && (units == 1 || units == 2))
                 // EGender.МУРЖСКОЙ
                 sb.append(convertIntOneAndNumberToStringCase(units, aCase, gender)).append(" ");
-            if (level == 2 && (units == 1 || units == 2)) // для 1000(Одна) и 2000(Две)
+            // склонение прописи числа для  1000(Одна) и 2000(Две)
+            if (level == 2 && (units == 1 || units == 2))
                 // EGender.ЖЕНСКИЙ
                 sb.append(convertIntOneAndNumberToStringCase(units, aCase, gender)).append(" ");
+            // склонение прописи числа для 1(Один) и 2(Два)
             if (level == 3 && (units == 1 || units == 2)) // Один и Два
                 // EGender.МУРЖСКОЙ
                 sb.append(convertIntOneAndNumberToStringCase(units, aCase, gender)).append(" ");
 
+            // Перевод остальных чисел от 3 до 9
             if (units != 1 && units != 2)
                 sb.append(convertIntNumberToStringCase(units, aCase)).append(" ");
         }
 
-        // @Param level; 1 - миллионы, 2 - тысячи, 3 - сотни и т.к
+        /*
+        * Данный участок кода отвечает за правильное форматирование слов миллион и тысяча
+        * @Param level; 1 - миллионы, 2 - тысячи, 3 - сотни и т.к
+        * */
         if (level == 1){
             int million = number % 10;
             if (million == 1)

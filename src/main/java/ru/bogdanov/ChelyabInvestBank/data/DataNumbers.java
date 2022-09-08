@@ -1,14 +1,18 @@
-package ru.bogdanov.data;
+package ru.bogdanov.ChelyabInvestBank.data;
 
-import ru.bogdanov.model.EGender;
-import ru.bogdanov.model.Numbers;
-import ru.bogdanov.model.SystemName;
+import ru.bogdanov.ChelyabInvestBank.model.EGender;
+import ru.bogdanov.ChelyabInvestBank.model.Numbers;
+import ru.bogdanov.ChelyabInvestBank.model.SystemName;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class DataNumbers {
+    /**
+     * Данный список содержит все числа в падежах
+     * */
     public static final List<Numbers> numbers = Arrays.asList(
         new Numbers(3, "три", "трёх", "трём", "три", "тремя", "трёх"),
         new Numbers(4, "четыре", "четырех", "четырем", "четыре", "четырьмя", "четырех"),
@@ -49,6 +53,9 @@ public class DataNumbers {
         new Numbers(900, "девятьсот", "девятисот", "девятистам", "девятьсот", "девятьюстами", "девятистах")
     );
 
+    /**
+     * Данный список содержит числа 1 и 2 в падежах
+     * */
     public static final List<Numbers> numbersOneAndTwo = Arrays.asList(
             new Numbers(1, EGender.МУРЖСКОЙ, "один", "одного", "одному", "один ", "одним", "одном"),
             new Numbers(1, EGender.ЖЕНСКИЙ, "одна", "одной", "одной", "одну", "одной", "одной"),
@@ -58,6 +65,9 @@ public class DataNumbers {
             new Numbers(2, EGender.СРЕДНИЙ, "два", "двух", "двум", "два", "двумя", "двух")
     );
 
+    /**
+     * Данный список содержит системные имена чисел(тысяча и миллион) в падежах
+     * */
     public static final HashMap<String, SystemName> systemNameSystem = new HashMap<String, SystemName>() {{
         put("thousandOne", new SystemName("тысяча", "тысячи", "тысяче", "тысячу", "тысячей", "тысяче"));
         put("thousandMany_1", new SystemName("тысячи", "тысяч", "тысячам", "тысячи", "тысячами", "тысячах"));

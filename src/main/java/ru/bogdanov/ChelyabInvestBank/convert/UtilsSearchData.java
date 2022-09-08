@@ -1,13 +1,16 @@
-package ru.bogdanov.convert;
+package ru.bogdanov.ChelyabInvestBank.convert;
 
-import ru.bogdanov.data.DataNumbers;
-import ru.bogdanov.model.ECase;
-import ru.bogdanov.model.EGender;
-import ru.bogdanov.model.SystemName;
+import ru.bogdanov.ChelyabInvestBank.data.DataNumbers;
+import ru.bogdanov.ChelyabInvestBank.model.ECase;
+import ru.bogdanov.ChelyabInvestBank.model.EGender;
+import ru.bogdanov.ChelyabInvestBank.model.SystemName;
 
 import java.util.stream.Collectors;
 
 public class UtilsSearchData {
+    /**
+     * Метод ищет число прописью по падежу
+     * */
     public static String convertIntNumberToStringCase(int number, ECase eCase) {
         return DataNumbers.numbers
                 .stream()
@@ -31,6 +34,9 @@ public class UtilsSearchData {
                 .collect(Collectors.joining(","));
     }
 
+    /**
+     * Метод ищет число прописью по падежу и полу
+     * */
     public static String convertIntOneAndNumberToStringCase(int number, ECase eCase, EGender gender) {
         return DataNumbers.numbersOneAndTwo
                 .stream()
@@ -54,6 +60,9 @@ public class UtilsSearchData {
                 .collect(Collectors.joining(","));
     }
 
+    /**
+     * Метод для получения систем имен счислений по (ед. числу и мн.ж числу) и падежу
+     * */
     public static String getSystemName(String name, ECase eCase) {
         SystemName systemNameSystem = DataNumbers.systemNameSystem.get(name);
         if (eCase.equals(ECase.ИМЕНИТЕЛЬНЫЙ))
